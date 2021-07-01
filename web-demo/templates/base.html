@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Yolo Tiny Object Detection Demo</title>
+	</head>
+	<body>
+		<div id="header">
+			<h1>Yolo Tiny Objection Detection Demo </h1>	
+			<div id="navigation">
+				<a href="/">Home </a>
+				<a href="/models_info">Models Info</a>
+			</div>
+		</div>
+		<div id="models_info">
+			{%block models_info %}{% endblock %}
+		</div>
+		<div> {% block upload %}{% endblock %} </div>
+	</body>
+</html>

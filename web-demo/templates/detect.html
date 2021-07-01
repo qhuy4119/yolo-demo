@@ -1,4 +1,11 @@
 {% extends "index.html" %}
 {% block detected %}
+	<div>
+		<p> Detected {{numObjects}} objects</p>
+		<ul>
+			{% for obj in listObjects %}
+			<li> {{obj[0]}}: {{obj[1]}}%</li>
+			{% endfor %}
+		</ul>
 	<img src="static/predictions.jpg">
 {% endblock %}
