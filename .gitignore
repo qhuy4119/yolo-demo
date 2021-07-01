@@ -6,6 +6,7 @@ web-demo/*
 !web-demo/static
 
 web-demo/static/*
+!web-demo/static/train
 !web-demo/static/styles
 
 
