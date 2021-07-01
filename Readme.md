@@ -1,16 +1,18 @@
-web-demo: everything about the web app
-yolov4: everything about the model
+# A web application to demo Yolo object detection
 
-training procedure:
-1. get darknet
-2. get pretrained weights
-3. test to see default model is working
-4. prepare custom dataset
-	1. images
-		run js file to generate urls
-		run python script to download from urls
-	2. labels
-		use LabelImg to annotate
-	3. custom cfg file
-	4. .data and .names file
-5. training
+## What is it?
+The website allows user to upload their image and it will detect objects in it using one of the two models:
+
+1. The pretrained yolov4 tiny network
+2. A finetuned network from yolov4 tiny to detect 5 animals: cheetah, chimpanzee, lion, hog deer, and sun bear.
+
+## How to use
+
+1. Clone the repository
+2. Make sure you can build [darknet](https://github.com/AlexeyAB/darknet)
+3. Run install.sh
+4. `pip install flask`
+5. `cd web-demo`
+6. `flask run`
+7. Open the url displayed on the terminal in a browser if it doesn't open automatically
+
