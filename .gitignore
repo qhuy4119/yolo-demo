@@ -12,4 +12,7 @@ web-demo/static/*
 !web-demo/static/train
 !web-demo/static/styles
 
+!utils
 
+utils/*
+!utils/*.py
