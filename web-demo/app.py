@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request
 from .detector import predict
+import os
 
 app = Flask(__name__)
 
@@ -27,4 +28,5 @@ def detect():
 
 @app.route("/models_info")
 def models_info():
-    return render_template("models_info.html")
+    trainImages = os.listdir("static/train")
+    return render_template("models_info.html", trainImages=trainImages)
