@@ -3,4 +3,5 @@ tags
 .vim
 web-demo/darknet/
 web-demo/static/
+!web-demo/static/styles/*
 web-demo/__pycache__/
