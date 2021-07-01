@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% block models_info %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/models_info.css') }}">
 <div>
 	<h2> Original Model </h2>
 	<p> This is the pretrained <a href="https://github.com/AlexeyAB/darknet#pre-trained-models">yolov4-tiny</a> model trained on MS COCO dataset</p>
 	<h2> Custom Model </h2>
-	<p> This is the cutom model finetuned from the original yolov4-tiny to detect 5 animals: cheetah, chimpanzee, hog deer, lion, sun bear. </p>
+	<p> This is the cutom model finetuned from the original yolov4-tiny to detect 5 animals: <span id="animals-list">cheetah, chimpanzee, hog deer, lion, sun bear. </span></p>
 	<p> The number of images in the training, validation, and test set are 1569, 314, 210</p>
 	<div>
 		<p>Here are some images from the training set</p>
 		{% for image in trainImages %}
-			<img src="../static/train/{{image}}">
+			<img src="../static/train/{{image}}" width="400">
 		{% endfor %}
 	</div>
 </div>
