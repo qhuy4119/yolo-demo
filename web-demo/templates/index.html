@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Yolo Tiny Object Detection Demo</title>
+	</head>
+	<body>
+		<h1>Yolo Tiny Objection Detection Demo </h1>	
+		<a href="/">Home </a>
+		<div id="upload">
+			<div>
+			<form action="/detect" method="POST" enctype="multipart/form-data">
+				<label for="uploaded-img">Upload an image to detect</label>
+
+				<input type="file"
+       					id="uploaded-img" name="uploaded-img"
+       					accept="image/png, image/jpeg">
+			</div>
+			<div>
+				<input type="radio", id="original-model", name="choose-model", value="original-model" checked>
+				<label for="original-model">Use default model<label> 
+				<input type="radio", id="custom-model", name="choose-model", value="custom-model" >
+				<label for="custom-model">Use custom model<label> 
+			</div>
+
+				<button type="submit">Detect</button>
+			</form>
+		</div>
+		<div id="result">
+			{% block detected %}
+			{% endblock %}
+		</div>
+	</body>
