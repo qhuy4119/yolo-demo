@@ -3,6 +3,7 @@
 
 web-demo/*
 !web-demo/*.py
+!web-demo/templates
 !web-demo/static
 
 web-demo/static/*
