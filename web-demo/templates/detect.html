@@ -1,11 +1,19 @@
 {% extends "index.html" %}
 {% block detected %}
+	{% if not isNewUpload %}
+	<p> You didn't upload new image. Using last uploaded image.</p>
+	{% endif %}
 	<div>
 		<p> Detected {{numObjects}} objects</p>
-		<ul>
-			{% for obj in listObjects %}
-			<li> {{obj[0]}}: {{obj[1]}}%</li>
-			{% endfor %}
-		</ul>
-	<img src="static/predictions.jpg">
+		<div id='result-section'>
+			<span>
+				<ul>
+					{% for obj in listObjects %}
+					<li> {{obj[0]}}: {{obj[1]}}%</li>
+					{% endfor %}
+				</ul>
+			</span>
+			<span>	<img src="static/predictions.jpg" height="500"> </span>
+
+		</div>
 {% endblock %}

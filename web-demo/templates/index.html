@@ -11,7 +11,7 @@
 		</div>
 		<div>
 			<input type="radio", id="original-model", name="choose-model", value="original-model" checked>
-			<label for="original-model">Use original model<label> 
+			<label for="original-model">Use yolov4 tiny model<label> 
 			<input type="radio", id="custom-model", name="choose-model", value="custom-model" >
 			<label for="custom-model">Use custom model<label> 
 		</div>
@@ -19,6 +19,8 @@
 			<button type="submit">Detect</button>
 		</form>
 	</div>
+	{% block error %}
+	{% endblock %}
 	<div id="result">
 		{% block detected %}
 		{% endblock %}
