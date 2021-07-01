@@ -2,6 +2,7 @@
 !web-demo
 
 web-demo/*
+!web-demo/install.sh
 !web-demo/*.py
 !web-demo/templates
 !web-demo/static
