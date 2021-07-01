@@ -1,2 +1,5 @@
 env/
 tags
+.vim
+web-demo/darknet/
+web-demo/static/
