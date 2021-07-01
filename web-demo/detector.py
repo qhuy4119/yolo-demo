@@ -1,5 +1,6 @@
 import subprocess
-import os, shutil
+import os, shutil, glob
+import json
 
 DARKNET_EXECUTABLE = ["darknet"]
 DARKNET_COMMAND = "detector test".split()
@@ -20,9 +21,13 @@ def predict(imagePath, model="original"):
         DARKNET_EXECUTABLE
         + DARKNET_COMMAND
         + [params["data"], params["cfg"], params["weights"], params["image"]]
-        + ["-dont_show"]
+        + "-dont_show -out predictions.json".split()
     )
     subprocess.run(command)
-    shutil.copy("predictions.jpg", "../static/predictions.jpg")
+    for f in glob.glob("predictions*"):
+        shutil.copy(f, "../static/")
+    with open("predictions.json", "r") as f:
+        data = json.load(f)
+        objects = data[0]["objects"]
     os.chdir("..")
-    return
+    return objects

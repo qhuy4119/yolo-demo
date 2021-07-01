@@ -17,8 +17,14 @@ def detect():
     uploaded_img.save(imgSavePath)
     if request.form["choose-model"] == "original-model":
         print("Using original yolo")
-        predict(imgSavePath, "original")
+        objects = predict(imgSavePath, "original")
     elif request.form["choose-model"] == "custom-model":
         print("Using custom yolo")
-        predict(imgSavePath, "custom")
-    return render_template("detect.html")
+        objects = predict(imgSavePath, "custom")
+    numObjects = len(objects)
+    listObjects = [(obj["name"], round(obj["confidence"]*100, 2)) for obj in objects]
+    return render_template("detect.html", numObjects=numObjects, listObjects=listObjects)
+
+@app.route("/models_info")
+def models_info():
+    return render_template("models_info.html")
