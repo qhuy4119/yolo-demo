@@ -1,1 +1,11 @@
 /*
+!web-demo
+
+web-demo/*
+!web-demo/*.py
+!web-demo/static
+
+web-demo/static/*
+!web-demo/static/styles
+
+
