@@ -23,7 +23,7 @@ def write_cfg_file(classes, batch, subdivisions, width, height):
     commandAndArgs = ["sed", "-i"]
     filename = ["yolov4-tiny-obj.cfg"]
     expressions = [
-        [r"/^batch/c\batch=%s" % batch],
+        [r"/^batch=/c\batch=%s" % batch],
         [r"/^subdivisions/c\subdivisions=%s" % subdivisions],
         [r"/^width/c\width=%s" % width],
         [r"/^height/c\height=%s" % height],
