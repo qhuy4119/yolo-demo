@@ -1,4 +1,4 @@
-import os
+import os, shutil, glob
 import csv
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -74,9 +74,29 @@ def split_dataset(dataFile="images.csv"):
     print("Shape of test: ", X_test.shape)
 
 
+def generate_dirs():
+    for d in ["train", "val", "test"]:
+        if os.path.isdir(d):
+            print("Overwriting existing %s" % d)
+            shutil.rmtree(d)
+        else:
+            print("Creating %s" % d)
+        os.mkdir(d)
+        with open(d + ".txt", "r") as f:
+            for imageFilePath in f:
+                globPattern = imageFilePath.strip(".jpg\n") + "*"
+                for f in glob.glob(globPattern):
+                    shutil.copy(f, d)
+
+
 if __name__ == "__main__":
     print("Current working directory: ", os.getcwd())
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--generate_dirs",
+        action="store_true",
+        help="Copy images specified in train.txt, val.txt, and test.txt into 3 directories: train, val, test ",
+    )
     parser.add_argument(
         "--prepend",
         action="store_true",
@@ -90,3 +110,5 @@ if __name__ == "__main__":
     write_csv_file()
     print("***Splitting dataset***")
     split_dataset()
+    if args.generate_dirs:
+        generate_dirs()
