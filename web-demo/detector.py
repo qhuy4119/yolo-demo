@@ -5,6 +5,7 @@ import json
 DARKNET_EXECUTABLE = ["darknet"]
 DARKNET_COMMAND = "detector test".split()
 
+
 def predict(imagePath, model="original"):
     params = {}
     if model == "original":
@@ -13,8 +14,8 @@ def predict(imagePath, model="original"):
         params["weights"] = "yolov4-tiny.weights"
     elif model == "custom":
         params["data"] = "data/custom-data/obj.data"
-        params["cfg"] = "data/custom-data/yolov4-obj.cfg"
-        params["weights"] = "data/custom-data/yolov4-obj.weights"
+        params["cfg"] = "data/custom-data/yolov4-tiny-obj.cfg"
+        params["weights"] = "data/custom-data/yolov4-tiny-obj.weights"
     params["image"] = "../%s" % imagePath
     os.chdir("darknet")
     command = (

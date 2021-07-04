@@ -38,7 +38,7 @@ def write_csv_file(filename="images.csv"):
                 ):
                     labelID = classMapping[imageDir]
                     f_writer.writerow(
-                        [os.path.join(os.getcwd(), imageDir, file), labelID]
+                        [os.path.join("data", "custom-data", imageDir, file), labelID]
                     )
         print(
             "Write image paths and their corresponding labels to %s successfully "
@@ -82,6 +82,7 @@ def generate_dirs():
         else:
             print("Creating %s" % d)
         os.mkdir(d)
+        print("Reading list of images from %s" % (d + ".txt"))
         with open(d + ".txt", "r") as f:
             for imageFilePath in f:
                 globPattern = imageFilePath.strip(".jpg\n") + "*"
@@ -111,4 +112,5 @@ if __name__ == "__main__":
     print("***Splitting dataset***")
     split_dataset()
     if args.generate_dirs:
+        print("Generating train, val, test directories")
         generate_dirs()
