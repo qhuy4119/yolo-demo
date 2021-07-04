@@ -7,13 +7,12 @@ import os, shutil
 
 
 def get_obj_data(classes):
-    cwd = os.getcwd()
     backupPath = input("Enter path of backup dir: ")
     objectData = dict(
         classes=classes,
-        train=os.path.join(cwd, "train.txt"),
-        valid=os.path.join(cwd, "val.txt"),
-        names=os.path.join(cwd, "obj.names"),
+        train="data/custom-data/train.txt",
+        valid="data/custom-data/val.txt",
+        names="data/custom-data/obj.names",
         backup=backupPath,
     )
     return objectData
