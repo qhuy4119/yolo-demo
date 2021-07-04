@@ -1,4 +1,4 @@
-import os, shutil, glob
+import os, shutil, glob, sys
 import csv
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -107,10 +107,11 @@ if __name__ == "__main__":
     if args.prepend:
         print("***Prepending image filenames***")
         prepend_image_name()
+    if args.generate_dirs:
+        print("Generating train, val, test directories")
+        generate_dirs()
+        sys.exit()
     print("***Writing csv file***")
     write_csv_file()
     print("***Splitting dataset***")
     split_dataset()
-    if args.generate_dirs:
-        print("Generating train, val, test directories")
-        generate_dirs()
