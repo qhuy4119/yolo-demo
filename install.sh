@@ -13,7 +13,7 @@ sed -i 's/AVX=0/AVX=1/' Makefile
 sed -i 's/OPENMP=0/OPENMP=1/' Makefile
 make
 wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v4_pre/yolov4-tiny.weights
-./darknet detect cfg/yolov4-tiny.cfg yolov4-tiny.weights data/dog.jpg -dont_show
+./darknet detector test cfg/coco.data cfg/yolov4-tiny.cfg yolov4-tiny.weights data/dog.jpg -dont_show
 echo Finish building darknet and yolov4-tiny
 
 # set up trained custom model
