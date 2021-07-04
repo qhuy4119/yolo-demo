@@ -24,7 +24,6 @@ sed -i '/valid/c\valid = data/custom-data/val.txt' obj.data
 sed -i '/names/c\names = data/custom-data/obj.names' obj.data
 sed -i 's@^.*darknet/@@' train.txt val.txt test.txt
 sed -i '/backup/c\backup = ' obj.data
-cp yolov4-tiny-obj_best.weights yolov4-tiny-obj.weights
 cd ..
 echo Copying trained custom model into web-demo/darknet/data/custom-data
 yes | cp -rf custom-data web-demo/darknet/data

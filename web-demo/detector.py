@@ -15,7 +15,7 @@ def predict(imagePath, model="original"):
     elif model == "custom":
         params["data"] = "data/custom-data/obj.data"
         params["cfg"] = "data/custom-data/yolov4-tiny-obj.cfg"
-        params["weights"] = "data/custom-data/yolov4-tiny-obj.weights"
+        params["weights"] = "data/custom-data/yolov4-tiny-obj_best.weights"
     params["image"] = "../%s" % imagePath
     os.chdir("darknet")
     command = (
