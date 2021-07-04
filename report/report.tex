@@ -1,0 +1,77 @@
+\documentclass[20pt, a4paper]{article}
+\usepackage[urlcolor=blue, colorlinks, linkcolor=blue]{hyperref}
+
+
+\begin{document}
+\title{Báo cáo đồ án cuối kỳ \\
+Máy học thống kê\\
+Yolo Object Detection}
+\author{1712495 - Nguyễn Quang Huy}
+\maketitle
+
+\renewcommand{\abstractname}{Tóm tắt}
+\begin{abstract}
+	Xây dựng website cho phép người dùng sử dụng mô hình Yolov4-Tiny để nhận dạng đối tượng thường ngày 
+	hoặc mô hình đã được điều chỉnh để nhận dạng 5 loài động vật: báo(cheetah), tinh tinh(chimpanzee), sư tử(lion), hươu vàng(hog deer), gấu chó(sun bear). 
+\end{abstract}
+
+\renewcommand{\contentsname}{Mục lục}
+\tableofcontents
+
+\section{Mô hình Yolov4-Tiny}
+
+\href{https://github.com/AlexeyAB/darknet#pre-trained-models}{Yolov4-Tiny} 
+là mô hình nhận dạng đối tượng được huấn luyện trên tập dữ liệu MS COCO với kết quả 40.2\% mAP@0.5.
+
+Để sử dụng mô hình, ta build framework \href{https://github.com/AlexeyAB/darknet}{darknet} và dùng nó cùng với trọng số của mô hình đã được huấn luyện để dự đoán đối tượng trong ảnh bất kỳ
+
+\section{Mô hình nhận dạng động vật}
+\subsection{Tổng quan}
+Mô hình này là Yolov4-Tiny được huấn luyện tiếp để nhận dạng 5 loài động vật: báo, tinh tinh, sư tử, hươu vàng, gấu chó.
+\subsection{Tập dữ liệu}
+\begin{itemize}
+	\item
+Tập dữ liệu gồm 2093 hình ảnh của 5 loài động vật, được tải về từ chức năng tìm kiếm hình ảnh của Google.\\
+Tham khảo các bước cụ thể trong quy trình thu thập dữ liệu tại đây: \href{https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/}{How to create a deep learning dataset using Google Images}
+
+\begin{tabular}{l | r}
+	\textbf{Loài} & \textbf{Số hình ảnh} \\
+	\hline
+	Báo & 538 \\
+	Tinh tinh & 561 \\
+	Sư tử & 338 \\
+	Hươu vàng & 377 \\
+	Gấu chó & 279 \\
+\end{tabular}
+
+\item
+Sau đó dữ liệu được dán nhãn thủ công theo format của Yolo
+
+\item
+Cuối cùng, dữ liệu được chia thành 3 tập train, validation, test bằng 
+sklearn.model\_selection.train\_test\_split với tỉ lệ lần lượt 75\%, 15\%, 10\%
+\end{itemize}
+
+\subsection{Huấn luyện}
+\subsubsection{Cách thực hiện}
+Để huấn luyện tiếp(fine tuning) mô hình Yolov4-Tiny có sẵn, ta làm theo 
+\href{https://github.com/AlexeyAB/darknet#how-to-train-tiny-yolo-to-detect-your-custom-objects}{hướng dẫn của framework darknet}
+
+Cụ thể:
+\begin{itemize}
+	\item Sử dụng Google Colab
+	\item Chọn batch và subdivisions phù hợp với cấu hình máy tính
+	\item Chọn max\_batch tùy theo số loại đối tượng(class). Đây chính là số epoch. \\
+		Darknet khuyến cáo max\_batch = max(classes*2000, 6000, number of training images)
+	\item Chọn network size: width và height. Các ảnh input sẽ được resize về kích thước này
+\end{itemize}
+
+\subsubsection{Kết quả}
+\begin{enumerate}
+	\item Huấn luyện 2 mô hình có network size khác nhau: (width=544, height=544) và (width=640, 640). Số max\_batch đều là 10000 theo công thức của darknet
+	\item Sau 10000 max\_batch, kết quả của cả 2 mô hình trên tập validation vào khoảng 50\% mAP@0.5. 
+	\item Thử tiếp tục huấn luận thêm 10000 max\_batch nữa thì đạt được kết quả: <placeholder>
+\end{enumerate}
+
+\end{document}
+
