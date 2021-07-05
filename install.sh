@@ -8,7 +8,7 @@ else
 	echo Found existing darknet
 fi
 cd darknet
-sed -i 's/OPENCV=0/OPENCV=1/' Makefile
+#sed -i 's/OPENCV=0/OPENCV=1/' Makefile
 sed -i 's/AVX=0/AVX=1/' Makefile
 sed -i 's/OPENMP=0/OPENMP=1/' Makefile
 make
