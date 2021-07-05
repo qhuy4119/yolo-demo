@@ -4,7 +4,12 @@
 	<p> You didn't upload new image. Using last uploaded image.</p>
 	{% endif %}
 	<div>
-		<p> Detected {{numObjects}} objects</p>
+		{% if model == "original-model" %}
+			<p> Yolov4-Tiny detected {{numObjects}} objects</p>
+		{% else %}
+			<p> Custom model detected {{numObjects}} objects</p>
+		{% endif %}
+			
 		<div id='result-section'>
 			<span>
 				<ul>
