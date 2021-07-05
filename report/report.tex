@@ -1,5 +1,7 @@
 \documentclass[20pt, a4paper]{article}
 \usepackage[urlcolor=blue, colorlinks, linkcolor=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{subfig}
 
 
 \begin{document}
@@ -26,7 +28,7 @@ là mô hình nhận dạng đối tượng được huấn luyện trên tập 
 Để sử dụng mô hình, ta build framework \href{https://github.com/AlexeyAB/darknet}{darknet} và dùng nó cùng với trọng số của mô hình đã được huấn luyện để dự đoán đối tượng trong ảnh bất kỳ
 
 \section{Mô hình nhận dạng động vật}
-\subsection{Tổng quan}
+\subsection{Giới thiệu}
 Mô hình này là Yolov4-Tiny được huấn luyện tiếp để nhận dạng 5 loài động vật: báo, tinh tinh, sư tử, hươu vàng, gấu chó.
 \subsection{Tập dữ liệu}
 \begin{itemize}
@@ -73,5 +75,25 @@ Cụ thể:
 	\item Thử tiếp tục huấn luận thêm 10000 max\_batch nữa thì đạt được kết quả: <placeholder>
 \end{enumerate}
 
+\begin{figure}[t]
+	\centering
+	\subfloat[\centering The first 10000 max\_batch]{{\includegraphics[width=5cm]{chart.png}}}
+	\qquad
+	\subfloat[\centering The later 10000 max\_batch]{{\includegraphics[width=5cm]{chart.png}}}
+	\caption width=544, height=544
+\end{figure}
+
+\subsection{Ứng dụng web}
+\subsubsection{Giới thiệu}
+Website cho phép người dùng tải lên một bức ảnh và lựa chọn sử dụng mô hình Yolov4-Tiny hay mô hình dự đoán động vật. 
+Sau đó website sẽ trả về kết quả dự đoán: số lượng đối tượng, tên \& độ tự tin, ảnh kết quả với ô khoanh vị trí các đối tượng
+
+\subsubsection{Chi tiết}
+Website được viết bằng thư viện Flask trong python. Sau khi chạy script cài đặt, một web server sẽ được khởi tạo, cùng với đó là framework darknet và các file trọng số đại diện cho các mô hình. 
+Ở đây ta có 2 file trọng số, đại diện cho 2 mô hình là Yolov4-Tiny và mô hình nhận diện động vật.
+
+Khi người dùng truy cập vào trang web, tải ảnh lên, chọn loại mô hình và nhấn nút dự đoán, 
+server sẽ tùy thuộc vào loại mô hình người dùng đã chọn mà dùng file trọng số tương ứng. Sau khi dự đoán xong, server sẽ render trang kết quả để hiển thị cho người dùng. 
+	
 \end{document}
 
