@@ -20,3 +20,7 @@ utils/*
 
 report/*
 !report.tex
+!report/544*/
+!report/544*/*
+!report/640*/
+!report/640*/*
