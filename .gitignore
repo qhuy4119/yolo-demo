@@ -24,3 +24,5 @@ report/*
 !report/544*/*
 !report/640*/
 !report/640*/*
+!report/example-images
+!report/example-images/*

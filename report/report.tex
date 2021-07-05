@@ -51,7 +51,7 @@ Sau đó dữ liệu được dán nhãn thủ công theo format của Yolo
 
 \item
 Cuối cùng, dữ liệu được chia thành 3 tập train, validation, test bằng 
-sklearn.model\_selection.train\_test\_split với tỉ lệ lần lượt 75\%, 15\%, 10\%
+\href{https://scikit-learn.org/stable/modules/generated/sklearn.model\_selection.train\_test_split.html}{sklearn.model\_selection.train\_test\_split} với tỉ lệ lần lượt 75\%, 15\%, 10\%
 \end{itemize}
 
 \subsection{Huấn luyện}
@@ -71,17 +71,35 @@ Cụ thể:
 \subsubsection{Kết quả}
 \begin{enumerate}
 	\item Huấn luyện 2 mô hình có network size khác nhau: (width=544, height=544) và (width=640, 640). Số max\_batch đều là 10000 theo công thức của darknet
-	\item Sau 10000 max\_batch, kết quả của cả 2 mô hình trên tập validation vào khoảng 50\% mAP@0.5. 
-	\item Thử tiếp tục huấn luận thêm 10000 max\_batch nữa thì đạt được kết quả: <placeholder>
+	\item Sau 10000 max\_batch, kết quả của cả 2 mô hình trên tập validation: 
+		\subitem (width=544, height=544): 58.31\% mAP@0.5
+		\subitem (width=640, height=640): 49.51\% mAP@0.5
+	\item Thử tiếp tục huấn luận thêm 5000 max\_batch nữa thì đạt được kết quả: 
+		\subitem (width=544, height=544): 81.58\% mAP@0.5
+		\subitem (width=640, height=640): 74.05\% mAP@0.5
+
+		và không có dấu hiệu tăng thêm. 
+		
+\begin{figure}[h!]
+	\centering
+	\subfloat[\centering 10000 max\_batch đầu]{{\includegraphics[width=5cm]{544-544-10000/chart.png}}}
+	\qquad
+	\subfloat[\centering 5000 max\_batch sau]{{\includegraphics[width=5cm]{544-544-15000/chart.png}}}
+	\caption \nolinebreak width=544, height=544 \\ red line: mAP
+\end{figure}	
+\begin{figure}[h!]
+	\centering
+\subfloat[\centering 10000 max\_batch đầu]{{\includegraphics[width=5cm]{640-640-10000/chart.png}}}
+	\qquad
+	\subfloat[\centering 5000 max\_batch sau]{{\includegraphics[width=5cm]{640-640-15000/chart.png}}}
+	\caption \nolinebreak width=640, height=640 \\ red line: mAP
+\end{figure}
+
+		Như vậy, mô hình được lựa chọn là (width=544, height=544) sau 15000 max\_batch
+	\item Cuối cùng, đánh giá mô hình được chọn trên tập test: 76.5\% mAP@0.5
 \end{enumerate}
 
-\begin{figure}[t]
-	\centering
-	\subfloat[\centering The first 10000 max\_batch]{{\includegraphics[width=5cm]{chart.png}}}
-	\qquad
-	\subfloat[\centering The later 10000 max\_batch]{{\includegraphics[width=5cm]{chart.png}}}
-	\caption width=544, height=544
-\end{figure}
+
 
 \subsection{Ứng dụng web}
 \subsubsection{Giới thiệu}
@@ -93,7 +111,12 @@ Website được viết bằng thư viện Flask trong python. Sau khi chạy sc
 Ở đây ta có 2 file trọng số, đại diện cho 2 mô hình là Yolov4-Tiny và mô hình nhận diện động vật.
 
 Khi người dùng truy cập vào trang web, tải ảnh lên, chọn loại mô hình và nhấn nút dự đoán, 
-server sẽ tùy thuộc vào loại mô hình người dùng đã chọn mà dùng file trọng số tương ứng. Sau khi dự đoán xong, server sẽ render trang kết quả để hiển thị cho người dùng. 
-	
+server sẽ tùy thuộc vào loại mô hình người dùng đã chọn mà dùng file trọng số tương ứng. Sau khi dự đoán xong, kết quả sẽ được hiển thị trên trang web. 
+\subsection{Tài liệu tham khảo}
+\begin{itemize}
+	\item \url{https://github.com/AlexeyAB/darknet}
+	\item \url{https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/}
+\end{itemize}
 \end{document}
+
 
