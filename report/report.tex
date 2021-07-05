@@ -1,7 +1,9 @@
 \documentclass[20pt, a4paper]{article}
+\usepackage[hyphens]{url}
 \usepackage[urlcolor=blue, colorlinks, linkcolor=blue]{hyperref}
 \usepackage{graphicx}
 \usepackage{subfig}
+\usepackage{float}
 
 
 \begin{document}
@@ -15,6 +17,8 @@ Yolo Object Detection}
 \begin{abstract}
 	Xây dựng website cho phép người dùng sử dụng mô hình Yolov4-Tiny để nhận dạng đối tượng thường ngày 
 	hoặc mô hình đã được điều chỉnh để nhận dạng 5 loài động vật: báo(cheetah), tinh tinh(chimpanzee), sư tử(lion), hươu vàng(hog deer), gấu chó(sun bear). 
+
+	Github: \url{https://github.com/qhuy4119/yolo-demo}
 \end{abstract}
 
 \renewcommand{\contentsname}{Mục lục}
@@ -46,12 +50,27 @@ Tham khảo các bước cụ thể trong quy trình thu thập dữ liệu tạ
 	Gấu chó & 279 \\
 \end{tabular}
 
+Một vài hình ảnh trong tập dữ liệu:
+
+\begin{figure}[h!]
+	\centering
+	\subfloat {\includegraphics[width=5cm, height=3cm]{example-images/cheetah-00000005.jpg}}
+	\qquad
+	\subfloat {\includegraphics[width=5cm, height=3cm]{example-images/chimpanzee-00000052.jpg}}
+
+	\subfloat {\includegraphics[width=5cm, height=3cm]{example-images/lion-00000052.jpg}}
+	\qquad
+	\subfloat {\includegraphics[width=5cm, height=3cm]{example-images/hog-deer-00000017.jpg}}
+
+	\subfloat {\includegraphics[width=5cm, height=3cm]{example-images/sun-bear-00000102.jpg}}
+\end{figure}
+
 \item
 Sau đó dữ liệu được dán nhãn thủ công theo format của Yolo
 
 \item
 Cuối cùng, dữ liệu được chia thành 3 tập train, validation, test bằng 
-\href{https://scikit-learn.org/stable/modules/generated/sklearn.model\_selection.train\_test_split.html}{sklearn.model\_selection.train\_test\_split} với tỉ lệ lần lượt 75\%, 15\%, 10\%
+\href{https://scikit-learn.org/stable/modules/generated/sklearn.model\_selection.train\_test_split.html}{sklearn.model\_selection.train\_test\_split} với tỉ lệ lần lượt 75\%(1569 ảnh), 15\%(314 ảnh), 10\%(210 ảnh).
 \end{itemize}
 
 \subsection{Huấn luyện}
@@ -79,7 +98,7 @@ Cụ thể:
 		\subitem (width=640, height=640): 74.05\% mAP@0.5
 
 		và không có dấu hiệu tăng thêm. 
-		
+		\pagebreak
 \begin{figure}[h!]
 	\centering
 	\subfloat[\centering 10000 max\_batch đầu]{{\includegraphics[width=5cm]{544-544-10000/chart.png}}}
@@ -106,16 +125,27 @@ Cụ thể:
 Website cho phép người dùng tải lên một bức ảnh và lựa chọn sử dụng mô hình Yolov4-Tiny hay mô hình dự đoán động vật. 
 Sau đó website sẽ trả về kết quả dự đoán: số lượng đối tượng, tên \& độ tự tin, ảnh kết quả với ô khoanh vị trí các đối tượng
 
+\pagebreak
+\begin{figure}[H]
+	\centering
+	\subfloat[\centering Trang chủ]{{\includegraphics[width=\linewidth]{example-images/homepage.png}}}
+
+	\subfloat[\centering Yolov4-Tiny]{{\includegraphics[width=\linewidth]{example-images/yolov4-tiny.png}}}
+
+	\subfloat[\centering Custom model]{{\includegraphics[width=\linewidth]{example-images/custom-model.png}}}
+\end{figure}
+
 \subsubsection{Chi tiết}
 Website được viết bằng thư viện Flask trong python. Sau khi chạy script cài đặt, một web server sẽ được khởi tạo, cùng với đó là framework darknet và các file trọng số đại diện cho các mô hình. 
 Ở đây ta có 2 file trọng số, đại diện cho 2 mô hình là Yolov4-Tiny và mô hình nhận diện động vật.
 
 Khi người dùng truy cập vào trang web, tải ảnh lên, chọn loại mô hình và nhấn nút dự đoán, 
 server sẽ tùy thuộc vào loại mô hình người dùng đã chọn mà dùng file trọng số tương ứng. Sau khi dự đoán xong, kết quả sẽ được hiển thị trên trang web. 
-\subsection{Tài liệu tham khảo}
+\section{Tài liệu tham khảo}
 \begin{itemize}
 	\item \url{https://github.com/AlexeyAB/darknet}
 	\item \url{https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-using-google-images/}
+	\item \url{https://colab.research.google.com/drive/12QusaaRj_lUwCGDvQNfICpa7kA7_a2dE?usp=sharing}
 \end{itemize}
 \end{document}
 
