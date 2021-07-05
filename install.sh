@@ -19,11 +19,6 @@ echo Finish building darknet and yolov4-tiny
 # set up trained custom model
 echo Setting up trained custom model
 cd ../../custom-data
-sed -i '/train/c\train = data/custom-data/train.txt' obj.data
-sed -i '/valid/c\valid = data/custom-data/val.txt' obj.data
-sed -i '/names/c\names = data/custom-data/obj.names' obj.data
-sed -i 's@^.*darknet/@@' train.txt val.txt test.txt
-sed -i '/backup/c\backup = ' obj.data
 cd ..
 echo Copying trained custom model into web-demo/darknet/data/custom-data
 yes | cp -rf custom-data web-demo/darknet/data
